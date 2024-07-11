@@ -1,0 +1,105 @@
+---
+title: "M10 Exercises"
+author: "Qais Youssef"
+date: "2024-07-03"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Exercise 10.1
+
+```{r}
+fibonacci <- numeric(10)
+fibonacci[1] <- fibonacci[2] <- 1
+for (i in 3:10) {
+  fibonacci[i] <- fibonacci[i-2] + fibonacci[i-1]
+}
+print(fibonacci)
+
+```
+
+## Exercise 10.2
+
+```{r}
+get_fibonacci <- function(n=10) {
+  fib <- numeric(n)
+  fib[1] <- fib[2] <- 1
+  for (i in 3:n) {
+    fib[i] <- fib[i-2] + fib[i-1]
+  }
+  return(fib)
+}
+print(get_fibonacci(20))
+```
+
+## Exercise 10.3
+
+```{r}
+in_interval <- function(x) { 
+  if (x >= 0 & x <= 1) { 
+    return(1) 
+  } else { 
+    return(0) 
+  } 
+}
+```
+
+## Exercise 10.4
+
+```{r}
+values <- c(-1, 0, 0.5, 1, 2)
+sapply(values, in_interval)
+```
+
+## Exercise 10.5
+
+```{r}
+print(head(letters, 10))
+print(tail(LETTERS, 10))
+print(LETTERS[22:24])
+```
+
+## Exercise 10.6
+
+```{r}
+for (n in 1:100) {
+  if (n %% 3 == 0 & n %% 5 == 0) {
+    print(paste(n, "FizzBuzz"))
+  } else if (n %% 3 == 0) {
+    print(paste(n, "Fizz"))
+  } else if (n %% 5 == 0) {
+    print(paste(n, "Buzz"))
+  } else {
+    print(n)
+  }
+}
+```
+
+## Exercise 10.7
+
+```{r}
+string <- "The cow jumped over the moon"
+unique_words <- unique(unlist(strsplit(tolower(string), " ")))
+print(unique_words)
+
+numbers <- c(1, 1, 4, 6, 6, 8)
+print(unique(numbers))
+```
+## Exercise 10.8
+
+```{r}
+nums <- c(10, 20, 30, 40, 50, 60)
+max_value <- max(nums)
+min_value <- min(nums)
+print(paste("Maximum value:", max_value))
+print(paste("Minimum value:", min_value))
+```
+## Exercise 10.9
+
+```{r}
+print(seq(20, 50))
+print(mean(20:60))
+print(sum(51:91))
+```
