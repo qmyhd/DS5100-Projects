@@ -1,0 +1,138 @@
+---
+title: "M11 Exercises"
+author: "Qais Youssef"
+date: "2024-07-08"
+output: html_document
+---
+#Exercise 1
+```{r error=TRUE, warning=FALSE, message=FALSE}
+#install.packages("tidyverse")
+library(tidyverse)
+```
+#Exercise 2
+```{r}
+scores <- 
+  tibble(
+    name = c("mike", "carol", "greg", "marcia", "peter", "jan", "bobby", "cindy", "alice"),
+    school = c("south", "south", "south", "south", "north", "north", "north", "south", "south"),
+    teacher = c("johnson", "johnson", "johnson", "johnson",  "smith", "smith", "smith", "perry", "perry"),
+    sex = c("male", "female", "male", "female", "male", "female", "male", "female", "female"),
+    math_score = c(4, 3, 2, 4, 3, 4, 5, 4, 5),
+    reading_score = c(1, 5, 2, 4, 5, 4, 1, 5, 4)
+)
+```
+
+#Exercise 3
+```{r}
+scores
+```
+
+#Exercise 4
+```{r}
+first3 <- scores %>% slice(1:3)
+first3
+```
+#Exercise 5
+```{r}
+scores %>% arrange(desc(math_score))
+scores %>% arrange(desc(math_score)) %>% slice(1)
+```
+#Exercise 6
+```{r}
+scores %>% arrange(name)
+```
+#Exercise 7
+```{r}
+scores %>% arrange(sex)
+```
+#Exercise 8
+```{r}
+scores %>% arrange(school, teacher, math_score, reading_score)
+```
+#Exercise 9
+```{r}
+scores %>% select(name, math_score, reading_score)
+```
+#Exercise 10
+```{r}
+scores %>% select(-sex)
+```
+#Exercise 11
+```{r}
+scores %>% select(-math_score, -reading_score)
+```
+#Exercise 12
+```{r}
+scores %>% select(sex, everything())
+```
+#Exercise 13
+```{r}
+scores %>% filter(school == "south", sex == "male")
+```
+#Exercise 14
+```{r}
+scores %>% filter(math_score > mean(math_score))
+```
+#Exercise 15
+```{r}
+scores %>% filter(math_score >= 4 & reading_score >= 3)
+```
+#Exercise 16
+```{r}
+scores %>% filter(math_score <= 3 | reading_score <= 3)
+```
+#Exercise 17
+```{r}
+scores %>% filter(reading_score %in% c(2, 3, 4))
+```
+#Exercise 18
+```{r}
+scores %>% filter(substr(name, 1, 1) == "m")
+```
+#Exercise 19
+```{r}
+scores %>% group_by(teacher) %>% filter(max(math_score) == 5)
+```
+#Exercise 20
+```{r}
+scores %>%
+  group_by(sex) %>% filter(mean(math_score) == 4)
+```
+#Exercise 21
+```{r}
+scores %>% mutate(math_score = math_score * 10) %>% mutate(reading_score = reading_score * 10)
+```
+#Exercise 22
+```{r}
+math_reading_avg <- scores %>% mutate(math_reading_avg = (math_score + reading_score) / 2)
+```
+#Exercise 26
+```{r}
+scores %>%
+  group_by(sex) %>%
+  mutate(math_score_centered_by_sex = math_score - mean(math_score)) %>%
+  arrange(desc(math_score))
+```
+#Exercise 27
+```{r}
+scores %>%
+  group_by(teacher) %>%
+  mutate(reading_score_centered_by_teacher = reading_score - mean(reading_score)) %>%
+  arrange(desc(reading_score))
+```
+#Exercise 28
+```{r}
+scores %>% summarize(mean_math_score = mean(math_score))
+```
+#Exercise 32
+```{r}
+scores %>%
+  group_by(school) %>%
+  summarize(min_math_score = min(math_score))
+```
+#Exercise 33
+```{r}
+scores %>%
+  group_by(teacher) %>%
+  summarize(max_math_score = max(math_score))
+```
